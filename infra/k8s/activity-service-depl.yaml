@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activity-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: activity
+  template:
+    metadata:
+      labels:
+        app: activity
+    spec:
+      containers:
+        - name: activity
+          image: fengdu/activity
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activity-srv
+spec:
+  selector:
+    app: activity
+  ports:
+    - name: activity
+      protocol: TCP
+      port: 5000
+      targetPort: 5000

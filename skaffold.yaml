@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/cert-manager/ca-issuer.yaml
+      - ./infra/k8s/*
+build:
+  artifacts:
+    - image: fengdu/activity
+      context: ./ActivityService
+    - image: fengdu/client
+      context: ./client-app
